@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Radhika ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Poppins:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+background:#000;
+overflow:hidden;
+font-family:'Poppins',sans-serif;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+
+}
+
+/* ===== SPACE BACKGROUND ===== */
+
+.space{
+position:fixed;
+inset:0;
+z-index:-10;
+background:
+radial-gradient(circle at bottom,#1b2735,#090a0f,#000);
+overflow:hidden;
+}
+
+.stars{
+position:absolute;
+width:100%;
+height:100%;
+background-image:
+radial-gradient(2px 2px at 20px 30px,#fff,transparent),
+radial-gradient(2px 2px at 150px 80px,#fff,transparent),
+radial-gradient(2px 2px at 280px 200px,#fff,transparent),
+radial-gradient(2px 2px at 400px 120px,#fff,transparent),
+radial-gradient(2px 2px at 500px 250px,#fff,transparent);
+background-size:600px 600px;
+animation:moveStars 80s linear infinite;
+opacity:.9;
+}
+
+@keyframes moveStars{
+
+from{
+transform:translateY(0);
+}
+
+to{
+transform:translateY(-600px);
+}
+
+}
+
+/* ===== COUNTDOWN ===== */
+
+#countdownPage{
+
+position:absolute;
+width:100%;
+text-align:center;
+padding:20px;
+
+}
+
+#title{
+
+font-family:'Great Vibes',cursive;
+font-size:50px;
+margin-bottom:10px;
+
+}
+
+#subtitle{
+
+font-size:18px;
+opacity:.8;
+margin-bottom:35px;
+
+}
+
+.countdown{
+
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+
+}
+
+.box{
+
+width:80px;
+padding:15px;
+background:rgba(255,255,255,.08);
+border-radius:18px;
+backdrop-filter:blur(8px);
+
+}
+
+.number{
+
+font-size:34px;
+font-weight:bold;
+font-family:'Cinzel',serif;
+
+}
+
+.label{
+
+font-size:12px;
+letter-spacing:1px;
+opacity:.7;
+
+}
+
+#message{
+
+display:none;
+
+width:90%;
+max-width:700px;
+
+text-align:center;
+
+font-family:'Cinzel',serif;
+
+font-size:28px;
+
+line-height:1.8;
+
+text-shadow:0 0 15px rgba(255,255,255,.3);
+
+}
+
+.cursor{
+
+display:inline-block;
+
+width:3px;
+
+background:white;
+
+animation:blink .8s infinite;
+
+}
+
+@keyframes blink{
+
+50%{
+
+opacity:0;
+
+}
+
+}
+
+.fade{
+
+animation:fade 1.5s;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="space">
+
+<div class="stars"></div>
+
+</div>
+
+<div id="countdownPage">
+
+<div id="title">
+
+ Happy Birthday Dear
+
+</div>
+
+<div id="subtitle">
+
+Radhika..
+
+</div>
+
+<div class="countdown">
+
+<div class="box">
+
+<div class="number" id="days">00</div>
+
+<div class="label">Days</div>
+
+</div>
+
+<div class="box">
+
+<div class="number" id="hours">00</div>
+
+<div class="label">Hours</div>
+
+</div>
+
+<div class="box">
+
+<div class="number" id="minutes">00</div>
+
+<div class="label">Minutes</div>
+
+</div>
+
+<div class="box">
+
+<div class="number" id="seconds">00</div>
+
+<div class="label">Seconds</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="message"></div>
+
+<script>
+
+const birthday=new Date(2026, 7, 12, 0, 0, 0).getTime();
+const messages = [
+
+"Happy Birthday Radhika ❤️",
+
+"Today is all about celebrating the wonderful person you are.",
+
+"I hope every smile you share today comes back to you a thousand times.",
+
+"You deserve endless happiness, peace and beautiful memories.",
+
+"Thank you for making life brighter just by being yourself.",
+
+"There are moments when I realize how much I miss the little conversations, the laughter, and simply having you around. I may not always say it, but your absence is felt more than you know. Still, all I want for you is to be happy, wherever life takes you ❤️",
+
+"May every dream you have slowly become reality.",
+
+"No matter where life takes us... I'll always wish the best for you.",
+
+"Stay happy forever. ♾️",
+
+"Happy Birthday Once Again ❤️"
+
+];
+
+let current = 0;
+
+function updateCountdown(){
+
+const now = new Date().getTime();
+
+const distance = birthday - now;
+
+if(distance <= 0){
+
+clearInterval(timer);
+
+document.getElementById("countdownPage").style.display="none";
+
+document.getElementById("message").style.display="block";
+
+showMessage();
+
+return;
+
+}
+
+const days=Math.floor(distance/(1000*60*60*24));
+
+const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+
+const seconds=Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("days").innerHTML=days;
+
+document.getElementById("hours").innerHTML=hours;
+
+document.getElementById("minutes").innerHTML=minutes;
+
+document.getElementById("seconds").innerHTML=seconds;
+
+}
+
+let timer=setInterval(updateCountdown,1000);
+
+updateCountdown();
+
+function showMessage(){
+
+const box=document.getElementById("message");
+
+box.innerHTML="";
+
+box.className="fade";
+
+let text=messages[current];
+
+let i=0;
+
+function type(){
+
+if(i<text.length){
+
+box.innerHTML=text.substring(0,i+1)+'<span class="cursor"></span>';
+
+let speed=40;
+
+if(text[i]=="."||text[i]==","||text[i]=="!"||text[i]=="\n"){
+
+speed=180;
+
+}
+
+i++;
+
+setTimeout(type,speed);
+
+}
+
+else{
+
+box.innerHTML=text;
+
+setTimeout(function(){
+
+current++;
+
+if(current<messages.length){
+
+showMessage();
+
+}
+
+},2500);
+
+}
+
+}
+
+type();
+
+}</script>
+
+</body>
+</html>
